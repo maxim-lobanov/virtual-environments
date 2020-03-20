@@ -27,7 +27,7 @@ Write-Host "Clean up various directories"
     }
 }
 
-$winInstallDir = "$env:windir\\Installer"
+$winInstallDir   = "$env:windir\\Installer"
 New-Item -Path $winInstallDir -ItemType Directory -Force
 
 $ErrorActionPreference = 'Continue'
