@@ -16,11 +16,11 @@ apt-get update
 
 # Install PHP
 if isUbuntu16 ; then
-    php_versions="5.6 7.0 7.1 7.2 7.3 7.4"
+    php_versions="7.2 7.3 7.4"
 fi
 
 if isUbuntu18 ; then
-    php_versions="7.1 7.2 7.3 7.4"
+    php_versions="7.2 7.3 7.4"
 fi
 
 if isUbuntu20 ; then
