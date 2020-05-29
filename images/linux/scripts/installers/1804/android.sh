@@ -70,22 +70,6 @@ echo "y" | ${ANDROID_SDK_ROOT}/tools/bin/sdkmanager \
     "build-tools;26.0.2" \
     "build-tools;26.0.1" \
     "build-tools;26.0.0" \
-    "build-tools;25.0.3" \
-    "build-tools;25.0.2" \
-    "build-tools;25.0.1" \
-    "build-tools;25.0.0" \
-    "build-tools;24.0.3" \
-    "build-tools;24.0.2" \
-    "build-tools;24.0.1" \
-    "build-tools;24.0.0" \
-    "build-tools;23.0.3" \
-    "build-tools;23.0.2" \
-    "build-tools;23.0.1" \
-    "build-tools;22.0.1" \
-    "build-tools;21.1.2" \
-    "build-tools;20.0.0" \
-    "build-tools;19.1.0" \
-    "build-tools;17.0.0" \
     "extras;android;m2repository" \
     "extras;google;m2repository" \
     "extras;google;google_play_services" \
