@@ -291,8 +291,6 @@ $markdown += New-MDList -Lines (Build-XamarinAndroidList) -Style Unordered
 $markdown += New-MDHeader "Unit Test Framework" -Level 4
 $markdown += New-MDList -Lines @(Get-NUnitVersion) -Style Unordered
 
-# First run doesn't provide full data about devices and runtimes
-Get-XcodeInfoList | Out-Null
 # Xcode section
 $xcodeInfo = Get-XcodeInfoList
 $markdown += New-MDHeader "Xcode" -Level 3
