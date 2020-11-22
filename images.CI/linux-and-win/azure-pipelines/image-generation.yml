@@ -42,6 +42,13 @@ jobs:
                         -GitHubFeedToken $(GITHUB_TOKEN)
     env:
       PACKER_LOG: 1
+      PACKER_LOG_PATH: $(Build.ArtifactStagingDirectory)/log.txt
+
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        Get-Content "$(Build.ArtifactStagingDirectory)/log.txt"
 
   - task: PowerShell@2
     displayName: 'Output Readme file content'
