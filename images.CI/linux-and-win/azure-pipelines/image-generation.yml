@@ -40,6 +40,8 @@ jobs:
                         -VirtualNetworkRG $(BUILD_AGENT_VNET_RESOURCE_GROUP) `
                         -VirtualNetworkSubnet $(BUILD_AGENT_SUBNET_NAME) `
                         -GitHubFeedToken $(GITHUB_TOKEN)
+    env:
+      PACKER_LOG: 1
 
   - task: PowerShell@2
     displayName: 'Output Readme file content'
