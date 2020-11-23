@@ -87,9 +87,16 @@ jobs:
             $sensitiveString -eq $null
         }
     displayName: 'Build VM'
-    env:
-      PACKER_LOG: 0
     workingDirectory: 'images/macos'
+    env:
+      PACKER_LOG: 1
+      PACKER_LOG_PATH: $(Build.ArtifactStagingDirectory)/log.txt
+
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        Get-Content "$(Build.ArtifactStagingDirectory)/log.txt"
 
   - bash: |
       echo "Copy image output files"
