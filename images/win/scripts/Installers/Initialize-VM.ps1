@@ -112,6 +112,7 @@ Invoke-Expression ((new-object net.webclient).DownloadString('https://chocolatey
 
 # Turn off confirmation
 choco feature enable -n allowGlobalConfirmation
+choco config set cacheLocation "c:\temp\choco"
 
 # https://github.com/chocolatey/choco/issues/89
 # Remove some of the command aliases, like `cpack` #89
