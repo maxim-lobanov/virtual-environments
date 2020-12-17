@@ -168,6 +168,7 @@
                 "./provision/core/haskell.sh",
                 "./provision/core/stack.sh",
                 "./provision/core/cocoapods.sh",
+                "./provision/core/swiftlint.sh",
                 "./provision/core/android-toolsets.sh",
                 "./provision/core/xamarin.sh",
                 "./provision/core/xamarin-android-ndk.sh",
