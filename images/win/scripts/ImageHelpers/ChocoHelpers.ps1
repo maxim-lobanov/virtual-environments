@@ -8,25 +8,7 @@ function Choco-Install {
     )
 
     process {
-        $count = 1
-        while($true)
-        {
-            Write-Host "Running [#$count]: choco install $packageName -y $argumentList"
-            choco install $packageName -y @argumentList
-
-            $pkg = choco list --localonly $packageName --exact --all --limitoutput
-            if ($pkg) {
-                Write-Host "Package installed: $pkg"
-                break
-            }
-            else {
-                $count++
-                if ($count -ge $retryCount) {
-                    Write-Host "Could not install $packageName after $count attempts"
-                    exit 1
-                }
-                Start-Sleep -Seconds 30
-            }
-        }
+        Write-Host "Running [#$count]: choco install $packageName -y $argumentList"
+        choco install $packageName -y @argumentList
     }
 }
