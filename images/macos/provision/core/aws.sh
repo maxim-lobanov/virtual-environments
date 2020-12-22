@@ -1,6 +1,7 @@
 #!/bin/bash -e -o pipefail
 
 source ~/utils/utils.sh
+source ~/utils/invoke-tests.sh
 
 echo Installing aws...
 AWS_CLI_URL="https://awscli.amazonaws.com/AWSCLIV2.pkg"
@@ -12,4 +13,6 @@ brew tap aws/tap
 brew install aws-sam-cli
 
 echo "Install aws cli session manager"
-brew cask install session-manager-plugin
+brew install --cask session-manager-plugin
+
+invoke_tests "Common" "AWS"

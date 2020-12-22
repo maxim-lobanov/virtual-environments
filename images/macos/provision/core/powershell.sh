@@ -1,12 +1,13 @@
 #!/bin/bash -e -o pipefail
 
 source ~/utils/utils.sh
+source ~/utils/invoke-tests.sh
 
 echo Installing Azure CLI...
 brew install azure-cli
 
 echo Installing PowerShell...
-brew cask install powershell
+brew install --cask powershell
 
 # A dummy call of `az` to initialize ~/.azure directory before the modules are installed
 az -v
@@ -34,3 +35,5 @@ sudo ln -s /usr/local/bin/pwsh /usr/local/bin/powershell
 
 # fix ~/.azure directory permissions
 sudo chown -R ${USER}: $HOME/.azure
+
+invoke_tests "Powershell"
