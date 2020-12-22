@@ -53,12 +53,8 @@ fi
 
 for package in ${bcask_common_utils[@]}; do
     echo "Install $package"
-    brew cask install $package
+    brew install --cask $package
 done
-
-if ! is_HighSierra; then
-    brew install swiftlint
-fi
 
 # Invoke bazel to download the latest bazel version via bazelisk
 bazel
