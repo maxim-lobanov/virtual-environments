@@ -39,18 +39,6 @@ function InstallSDKVersion (
     $sdkTargetsUrl = "https://raw.githubusercontent.com/dotnet/sdk/82bc30c99f1325dfaa7ad450be96857a4fca2845/src/Tasks/Microsoft.NET.Build.Tasks/targets/${sdkTargetsName}"
     $sdkTargetsPath = "C:\Program Files\dotnet\sdk\$sdkVersion\Sdks\Microsoft.NET.Sdk\targets"
     Start-DownloadWithRetry -Url $sdkTargetsUrl -DownloadPath $sdkTargetsPath -Name $sdkTargetsName
-
-    # warm up dotnet for first time experience
-    $templates | ForEach-Object {
-        $template = $_
-        $projectPath = Join-Path -Path C:\temp -ChildPath $template
-        New-Item -Path $projectPath -Force -ItemType Directory
-        Push-Location -Path $projectPath
-        & $env:ProgramFiles\dotnet\dotnet.exe new globaljson --sdk-version "$sdkVersion"
-        & $env:ProgramFiles\dotnet\dotnet.exe new $template
-        Pop-Location
-        Remove-Item $projectPath -Force -Recurse
-    }
 }
 
 function InstallAllValidSdks()
