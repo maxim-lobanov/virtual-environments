@@ -1,3 +1,5 @@
+#Requires -Version 7
+
 ################################################################################
 ##  File:  Install-DotnetSDK.ps1
 ##  Desc:  Install all released versions of the dotnet sdk and populate package
@@ -48,16 +50,28 @@ function Invoke-WarmupDotNet {
         [String] $Version
     )
 
-    $templates = @('console', 'mstest', 'web', 'mvc', 'webapi')
     $tempRootDirectory = Join-Path $env:TEMP "dotnet-$Version"
     New-Item -Path $tempRootDirectory -ItemType Directory -Force
 
-    $templates | ForEach-Object {
-        $template = $_
-        $templateDirectory = Join-Path $tempRootDirectory $template
+    # PowerShell 5.1 doesn't support "ForEach-Object -Parallel" so invoke it 
+    #$templates | ForEach-Object {
+    #    Start-Job {
+    #        $template = $using:_
+    #        $templateDirectory = Join-Path $using:tempRootDirectory $template
+    #        New-Item -Path $templateDirectory -ItemType Directory -Force
+    #        Push-Location -Path $templateDirectory
+    #        & dotnet new globaljson --sdk-version $using:Version
+    #        & dotnet new $template
+    #        Pop-Location
+    #    }
+    #} | Receive-Job -Wait -AutoRemoveJob
+
+    @('console', 'mstest', 'web', 'mvc', 'webapi') | ForEach-Object -Parallel {
+        $template = $using:_
+        $templateDirectory = Join-Path $using:tempRootDirectory $template
         New-Item -Path $templateDirectory -ItemType Directory -Force
         Push-Location -Path $templateDirectory
-        & dotnet new globaljson --sdk-version $Version
+        & dotnet new globaljson --sdk-version $using:Version
         & dotnet new $template
         Pop-Location
     }
@@ -97,6 +111,7 @@ Write-Host "Invoking warm up for every SDK version..."
 $sdkVersions | ForEach-Object {
     Write-Host "Invoke warm up for dotnet $_"
     Invoke-WarmupDotNet -Version $_
+    Write-Host "Finish warm up for dotnet $_"
 }
 
 # Add "$env:USERPROFILE\.dotnet\tools" to PATH
