@@ -13,7 +13,7 @@ function Get-AvailableSDKVersions {
     $dotnetVersions = (Get-ToolsetContent).dotnet.versions
     $sdkList = [System.Collections.Generic.List[string]]::New()
     $dotnetVersions | ForEach-Object {
-        $releasesUrl = "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/${dotnetVersion}/releases.json"
+        $releasesUrl = "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/$_/releases.json"
         $releases = Invoke-RestMethod $releasesUrl
         $sdkList.Add($releases.releases.sdk.version)
         $sdkList.AddRange($releases.releases.sdks.version)
