@@ -15,8 +15,8 @@ function Get-AvailableSDKVersions {
     $dotnetVersions | ForEach-Object {
         $releasesUrl = "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/$_/releases.json"
         $releases = Invoke-RestMethod $releasesUrl
-        $sdkList.Add($releases.releases.sdk.version)
-        $sdkList.AddRange($releases.releases.sdks.version)
+        $sdkList.AddRange([Collections.Generic.List[String]]$releases.releases.sdk.version)
+        $sdkList.AddRange([Collections.Generic.List[String]]$releases.releases.sdks.version)
     }
 
     # exclude all preview and rc versions
