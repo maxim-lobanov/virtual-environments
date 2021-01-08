@@ -93,6 +93,8 @@ Invoke-ApplyWorkaround1276 -SdkVersions $sdkVersions
 # Warm up is necessary to speed up customers' builds on Hosted agents
 # It initializes every project type for every dotnet
 # Under hood, it downloads and cached NuGet packages that are used by default in .NET projects
+# C:\Users\testAdm2\.nuget\packages
+# C:\Program Files (x86)\Microsoft SDKs\NuGetPackages
 Write-Host "Invoking warm up for every SDK version..."
 $sdkVersions | ForEach-Object {
     Write-Host "Invoke warm up for dotnet $_"
