@@ -20,8 +20,8 @@ function Get-AvailableSDKVersions {
     }
 
     # exclude all preview and rc versions
-    $stableSdkList = $sdkList | Select-String -Pattern 'preview|rc|display' -NotMatch
-    return $stableSdkList | Sort-Object { [Version]$_.Value }
+    $stableSdkList = $sdkList | Select-String -Pattern 'preview|rc|display' -NotMatch | Select-Object -ExpandProperty Line
+    return $stableSdkList | Sort-Object { [Version]$_ }
 }
 
 function Install-InstallerScript {
@@ -38,7 +38,7 @@ function Invoke-ApplyWorkaround1276 {
     $sdkTargetsUrl = "https://raw.githubusercontent.com/dotnet/sdk/82bc30c99f1325dfaa7ad450be96857a4fca2845/src/Tasks/Microsoft.NET.Build.Tasks/targets/${sdkTargetsName}"
     $sdkTargetsLocalPath = Start-DownloadWithRetry -Url $sdkTargetsUrl
     $SdkVersions | ForEach-Object {
-        $sdkTargetsPath = "C:\Program Files\dotnet\sdk\$sdkVersion\Sdks\Microsoft.NET.Sdk\targets\$sdkTargetsName"
+        $sdkTargetsPath = "C:\Program Files\dotnet\sdk\$_\Sdks\Microsoft.NET.Sdk\targets\$sdkTargetsName"
         Copy-Item -Path $sdkTargetsLocalPath -Destination $sdkTargetsPath
     }
 }
