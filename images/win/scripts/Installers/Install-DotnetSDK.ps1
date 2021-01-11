@@ -50,19 +50,19 @@ function Invoke-WarmupDotNet {
 
     $templates = @('console', 'mstest', 'web', 'mvc', 'webapi')
     $tempRootDirectory = Join-Path $env:TEMP "dotnet-$Version"
-    New-Item -Path $tempRootDirectory -ItemType Directory -Force
+    New-Item -Path $tempRootDirectory -ItemType Directory -Force | Out-Null
 
     $templates | ForEach-Object {
         $template = $_
         $templateDirectory = Join-Path $tempRootDirectory $template
-        New-Item -Path $templateDirectory -ItemType Directory -Force
+        New-Item -Path $templateDirectory -ItemType Directory -Force | Out-Null
         Push-Location -Path $templateDirectory
         & dotnet new globaljson --sdk-version $Version
         & dotnet new $template
         Pop-Location
     }
 
-    Remove-Item -Path $tempRootDirectory -Force
+    Remove-Item -Path $tempRootDirectory -Recurse -Force
 }
 
 function RunPostInstallationSteps()
