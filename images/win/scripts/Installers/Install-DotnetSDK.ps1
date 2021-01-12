@@ -98,7 +98,7 @@ Invoke-ApplyWorkaround1276 -SdkVersions $sdkVersions
 Write-Host "Invoking warm up for every SDK version..."
 $sdkVersions | ForEach-Object {
     Write-Host "Invoke warm up for dotnet $_"
-    Invoke-WarmupDotNet -Version $_
+    #Invoke-WarmupDotNet -Version $_
 }
 
 # Add "$env:USERPROFILE\.dotnet\tools" to PATH
