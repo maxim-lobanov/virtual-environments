@@ -60,6 +60,7 @@
         {
             "type": "shell",
             "inline": [
+                "apt-cache policy | awk '/http.*amd64/{print$2}' | sort -u",
                 "mkdir {{user `image_folder`}}",
                 "chmod 777 {{user `image_folder`}}"
             ],
